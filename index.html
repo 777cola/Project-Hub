@@ -8,20 +8,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500&family=Noto+Sans+TC:wght@200;300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ── Reset & Base (保持浅色) ── */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
     body{
       font-family:'Inter','Noto Sans SC','Noto Sans TC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-      background:#f4f2ee;
-      color:#1a1a1a;
+      background:#f4f2ee;color:#1a1a1a;
       min-height:100vh;overflow:hidden;
       display:flex;flex-direction:column;align-items:center;justify-content:center;
       user-select:none;
     }
     body::after{
-      content:'';position:fixed;inset:0;z-index:999;
-      pointer-events:none;opacity:.025;
+      content:'';position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.025;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-repeat:repeat;background-size:256px 256px;
     }
@@ -35,18 +32,14 @@
     /* ── Lang Toggle ── */
     #lang-toggle{
       position:fixed;top:2rem;right:2.5rem;z-index:100;
-      display:flex;align-items:center;
-      background:#fff;
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:16px;padding:4px;
+      display:flex;align-items:center;background:#fff;
+      border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:4px;
       box-shadow:0 2px 16px rgba(0,0,0,.04);
     }
     .lang-btn{
-      display:flex;align-items:center;gap:0;
-      background:transparent;border:none;
+      display:flex;align-items:center;gap:0;background:transparent;border:none;
       font-family:inherit;font-size:.8rem;font-weight:400;letter-spacing:.04em;
-      color:rgba(0,0,0,.2);
-      cursor:pointer;padding:.4rem .5rem;border-radius:12px;
+      color:rgba(0,0,0,.2);cursor:pointer;padding:.4rem .5rem;border-radius:12px;
       white-space:nowrap;
       transition:color .3s,background .3s,box-shadow .3s,padding .45s cubic-bezier(.22,1,.36,1);
     }
@@ -61,21 +54,18 @@
     .lang-btn.active .full{max-width:80px;opacity:1;margin-left:6px}
     .lang-btn:not(.active):hover{color:rgba(0,0,0,.45);background:rgba(0,0,0,.02)}
 
-    /* ── Orbit View ── */
+    /* ── Orbit ── */
     .orbit-wrap{position:relative;z-index:1;width:100%;height:100vh;display:flex;align-items:center;justify-content:center}
-    .orbit-view{position:relative;width:900px;height:900px;display:flex;align-items:center;justify-content:center}
+    .orbit-view{position:relative;width:860px;height:860px;display:flex;align-items:center;justify-content:center}
 
-    /* ── Rings ── */
     .orb-ring{
-      position:absolute;top:50%;left:50%;
-      border-radius:50%;transform:translate(-50%,-50%);
+      position:absolute;top:50%;left:50%;border-radius:50%;transform:translate(-50%,-50%);
       pointer-events:none;will-change:transform;
     }
-    .orb-ring.r1{width:700px;height:700px;border:1px solid rgba(0,0,0,.08)}
-    .orb-ring.r2{width:560px;height:560px;border:1px dashed rgba(0,0,0,.05)}
+    .orb-ring.r1{width:640px;height:640px;border:1px solid rgba(0,0,0,.08)}
+    .orb-ring.r2{width:520px;height:520px;border:1px dashed rgba(0,0,0,.05)}
     .orb-ring.r3{width:340px;height:340px;border:1px solid rgba(0,0,0,.05)}
 
-    /* ── Orbital Dots ── */
     .orb-dot{
       position:absolute;top:50%;left:50%;
       width:6px;height:6px;margin:-3px 0 0 -3px;
@@ -86,9 +76,8 @@
 
     /* ── Center Hub ── */
     .center-hub{
-      position:absolute;top:50%;left:50%;
-      transform:translate(-50%,-50%);
-      width:200px;height:200px;border-radius:50%;
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:176px;height:176px;border-radius:50%;
       border:1px solid rgba(0,0,0,.07);
       display:flex;flex-direction:column;align-items:center;justify-content:center;
       background:rgba(255,255,255,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -99,16 +88,17 @@
     .center-hub .name-cn{font-size:1.6rem;font-weight:400;letter-spacing:.06em;color:rgba(0,0,0,.75);line-height:1.2}
     .center-hub .name-en{font-size:.95rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.55);margin-top:4px}
     .center-hub .role{font-size:.8rem;font-weight:400;letter-spacing:.12em;color:rgba(0,0,0,.45);margin-top:6px}
+
     .pulse-ring{
       position:absolute;top:50%;left:50%;
-      width:200px;height:200px;margin:-100px 0 0 -100px;
+      width:176px;height:176px;margin:-88px 0 0 -88px;
       border-radius:50%;border:1px solid rgba(180,140,100,.15);
       pointer-events:none;opacity:0;transform:scale(1);
       transition:opacity .4s,transform .6s cubic-bezier(.22,1,.36,1);
     }
-    .pulse-ring.visible{opacity:1;transform:scale(1.3)}
+    .pulse-ring.visible{opacity:1;transform:scale(1.35)}
 
-    /* ── Orbit Nodes (交互式卡片触发器) ── */
+    /* ── Orbit Nodes ── */
     .project-node{
       position:absolute;top:50%;left:50%;
       cursor:pointer;will-change:transform,opacity;
@@ -116,41 +106,69 @@
       z-index:5;
     }
     .project-node .node-hit{
-      width:60px;height:60px;margin:-30px 0 0 -30px;
       display:flex;align-items:center;justify-content:center;
       position:relative;
     }
     .project-node .node-num{
-      font-size:.65rem;font-weight:500;letter-spacing:.06em;
-      color:#b48a64;margin-bottom:2px;text-align:center;
+      font-size:.7rem;font-weight:500;letter-spacing:.08em;
+      color:#b48a64;margin-bottom:3px;text-align:center;
       transition:color .3s;
     }
     .project-node .node-title{
-      font-size:1rem;font-weight:400;letter-spacing:.04em;
+      font-size:1.25rem;font-weight:400;letter-spacing:.04em;
       color:#1a1a1a;line-height:1.3;text-align:center;
       transition:color .3s;
     }
     .project-node .node-desc{
-      font-size:.75rem;font-weight:400;letter-spacing:.03em;
+      font-size:.85rem;font-weight:400;letter-spacing:.03em;
       color:#1a1a1a;opacity:.4;line-height:1.4;text-align:center;
       transition:opacity .3s;
     }
+    .project-node .node-glow-ring{
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:80px;height:80px;border-radius:50%;
+      border:1.5px solid transparent;
+      pointer-events:none;
+      transition:all .4s cubic-bezier(.22,1,.36,1);
+      opacity:0;
+    }
+
+    /* ── Hover ── */
     .project-node:hover .node-num{color:#b48a64}
     .project-node:hover .node-title{color:#b48a64}
     .project-node:hover .node-desc{opacity:.6}
 
+    /* ── Active (点击选中) ── */
+    .project-node.active .node-hit{animation:nodePop .45s cubic-bezier(.22,1,.36,1) forwards}
     .project-node.active .node-num{color:#b48a64}
-    .project-node.active .node-title{color:#b48a64}
-    .project-node.dimmed{opacity:.15;filter:blur(1.5px)}
-    .project-node.dimmed .node-title{opacity:.15}
+    .project-node.active .node-title{color:#b48a64;transform:scale(1.08)}
+    .project-node.active .node-glow-ring{
+      border-color:rgba(180,140,100,.35);
+      opacity:1;
+      animation:glowPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes nodePop{
+      0%{transform:scale(1)}
+      30%{transform:scale(1.15)}
+      70%{transform:scale(.97)}
+      100%{transform:scale(1.06)}
+    }
+    @keyframes glowPulse{
+      0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}
+      50%{transform:translate(-50%,-50%) scale(1.2);opacity:.15}
+    }
+
+    .project-node.dimmed{opacity:.12;filter:blur(1.5px)}
+    .project-node.dimmed .node-title{opacity:.12}
+    .project-node.dimmed:hover{opacity:.2}
 
     /* ── Connection Lines ── */
     #connections{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
 
-    /* ── Detail Card (浅色风格) ── */
+    /* ── Detail Card (简约版) ── */
     #card-overlay{
       position:fixed;inset:0;z-index:40;
-      background:rgba(0,0,0,.15);
+      background:rgba(0,0,0,.12);
       opacity:0;visibility:hidden;
       transition:all .35s;
     }
@@ -158,10 +176,10 @@
 
     .detail-card{
       position:fixed;top:50%;left:50%;
-      width:300px;
+      width:320px;
       background:#fff;
       border:1px solid rgba(0,0,0,.06);
-      border-radius:16px;
+      border-radius:14px;
       padding:0;
       opacity:0;visibility:hidden;
       transform:translate(-50%,-50%) scale(.92) translateY(-8px);
@@ -175,38 +193,30 @@
       width:1px;height:10px;background:rgba(0,0,0,.08);
     }
     .detail-card .card-header{
-      padding:18px 22px 8px;
+      padding:20px 24px 6px;
       display:flex;justify-content:space-between;align-items:flex-start;
     }
     .detail-card .card-status{
-      display:inline-block;padding:3px 12px;font-size:.6rem;font-weight:500;letter-spacing:.08em;border-radius:0;
+      display:inline-block;padding:3px 14px;
+      font-size:.7rem;font-weight:500;letter-spacing:.06em;
       font-family:inherit;
     }
     .detail-card .card-status.completed{color:#1a1a1a;background:rgba(180,140,100,.12);border:1px solid rgba(180,140,100,.2)}
     .detail-card .card-status.in-progress{color:#fff;background:#1a1a1a;border:1px solid #1a1a1a}
     .detail-card .card-status.pending{color:rgba(0,0,0,.4);background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.08)}
-    .detail-card .card-date{font-size:.65rem;font-family:'Inter',monospace;color:rgba(0,0,0,.25);margin-top:3px;text-align:right}
-    .detail-card .card-title{font-size:1rem;font-weight:500;color:#1a1a1a;margin:6px 22px 0;line-height:1.35}
-    .detail-card .card-body{padding:10px 22px 14px}
-    .detail-card .card-desc{font-size:.8rem;color:rgba(0,0,0,.55);line-height:1.6}
+    .detail-card .card-title{font-size:1.1rem;font-weight:500;color:#1a1a1a;margin:6px 24px 0;line-height:1.35}
+    .detail-card .card-body{padding:10px 24px 16px}
+    .detail-card .card-desc{font-size:.85rem;color:rgba(0,0,0,.5);line-height:1.6}
 
-    .detail-card .card-meta{padding:12px 22px 14px;border-top:1px solid rgba(0,0,0,.04)}
-    .detail-card .energy-row{display:flex;justify-content:space-between;align-items:center;font-size:.7rem;margin-bottom:6px}
-    .detail-card .energy-row .label{display:flex;align-items:center;gap:5px;color:rgba(0,0,0,.35)}
-    .detail-card .energy-row .label svg{width:11px;height:11px;color:#b48a64}
-    .detail-card .energy-row .value{font-family:'Inter',monospace;color:#1a1a1a;font-weight:500}
-    .detail-card .energy-bar{width:100%;height:4px;background:rgba(0,0,0,.04);border-radius:2px;overflow:hidden}
-    .detail-card .energy-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#b48a64,#d4b896);transition:width .8s cubic-bezier(.22,1,.36,1)}
-
-    .detail-card .card-links{padding:10px 22px 14px;border-top:1px solid rgba(0,0,0,.04)}
+    .detail-card .card-links{padding:10px 24px 14px;border-top:1px solid rgba(0,0,0,.04)}
     .detail-card .card-links .links-label{
       display:flex;align-items:center;gap:5px;
-      font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(0,0,0,.3);margin-bottom:8px;
+      font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(0,0,0,.3);margin-bottom:8px;
     }
     .detail-card .card-links .links-label svg{width:11px;height:11px;color:#b48a64}
     .detail-card .card-links .link-btn{
       display:inline-flex;align-items:center;gap:4px;
-      padding:4px 10px;font-size:.7rem;color:rgba(0,0,0,.55);
+      padding:5px 12px;font-size:.75rem;color:rgba(0,0,0,.55);
       border:1px solid rgba(0,0,0,.08);border-radius:0;
       background:transparent;cursor:pointer;font-family:inherit;
       transition:all .25s;margin:0 4px 6px 0;
@@ -214,7 +224,7 @@
     .detail-card .card-links .link-btn:hover{background:rgba(180,140,100,.06);border-color:rgba(180,140,100,.2);color:#1a1a1a}
     .detail-card .card-links .link-btn svg{width:8px;height:8px;color:rgba(0,0,0,.2)}
 
-    .detail-card .card-action{padding:0 22px 18px}
+    .detail-card .card-action{padding:0 24px 18px}
     .detail-card .card-action .visit-btn{
       display:inline-flex;align-items:center;gap:6px;
       padding:8px 18px;font-size:.8rem;font-weight:500;font-family:inherit;
@@ -227,37 +237,36 @@
     .detail-card .card-action .visit-btn.disabled{background:rgba(0,0,0,.08);color:rgba(0,0,0,.3);cursor:default}
     .detail-card .card-action .visit-btn.disabled:hover{background:rgba(0,0,0,.08)}
 
-    .detail-card .card-close{
+    .detail-card .card-close-btn{
       position:absolute;top:12px;right:14px;
-      width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+      width:26px;height:26px;display:flex;align-items:center;justify-content:center;
       background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.06);border-radius:50%;
-      color:rgba(0,0,0,.25);cursor:pointer;font-size:.7rem;
+      color:rgba(0,0,0,.2);cursor:pointer;font-size:.75rem;font-family:inherit;
       transition:all .25s;
     }
-    .detail-card .card-close:hover{background:rgba(0,0,0,.06);color:#1a1a1a}
+    .detail-card .card-close-btn:hover{background:rgba(0,0,0,.06);color:#1a1a1a}
 
     /* ── Footer ── */
     .orbit-footer{position:fixed;bottom:1.5rem;left:0;right:0;z-index:1;text-align:center}
     .orbit-footer p{font-size:.6rem;font-weight:400;letter-spacing:.15em;color:rgba(0,0,0,.25)}
 
-    /* ── 入场动画 ── */
+    /* ── 入场 ── */
     .orbit-view.loaded .project-node{opacity:1}
     .orbit-view.loaded .project-node{transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
     .project-node{opacity:0}
 
     /* ── Responsive ── */
-    @media(max-width:1024px){
+    @media(max-width:900px){
       .orbit-view{width:100vw;height:100vw;max-width:700px;max-height:700px}
-      .orb-ring.r1{width:80vw;height:80vw;max-width:550px;max-height:550px}
-      .orb-ring.r2{width:65vw;height:65vw;max-width:440px;max-height:440px}
+      .orb-ring.r1{width:78vw;height:78vw;max-width:520px;max-height:520px}
+      .orb-ring.r2{width:62vw;height:62vw;max-width:420px;max-height:420px}
       .orb-ring.r3{width:40vw;height:40vw;max-width:270px;max-height:270px}
-      .center-hub{width:150px;height:150px}
+      .center-hub{width:140px;height:140px}
       .center-hub .name-cn{font-size:1.2rem}
       .center-hub .name-en{font-size:.8rem}
       .center-hub .role{font-size:.7rem}
-      .project-node .node-title{font-size:.9rem}
-      .project-node .node-desc{font-size:.65rem}
-      .project-node .node-hit{width:50px;height:50px;margin:-25px 0 0 -25px}
+      .project-node .node-title{font-size:1rem}
+      .project-node .node-desc{font-size:.7rem}
     }
     @media(max-width:640px){
       body{overflow-y:auto}
@@ -269,10 +278,13 @@
       .center-hub .role{font-size:.65rem}
       #orbit-nodes{position:relative;width:100%;max-width:400px}
       .project-node{position:relative!important;top:auto!important;left:auto!important;margin-bottom:1.5rem;display:block;opacity:1!important;width:100%;transform:none!important}
-      .project-node .node-hit{width:auto;height:auto;margin:0}
+      .project-node .node-hit{width:auto;height:auto}
       .project-node .node-num{text-align:left;font-size:.6rem;margin-bottom:0}
-      .project-node .node-title{text-align:left;font-size:.95rem}
-      .project-node .node-desc{text-align:left;font-size:.65rem}
+      .project-node .node-title{text-align:left;font-size:1.05rem}
+      .project-node .node-desc{text-align:left;font-size:.7rem}
+      .project-node .node-glow-ring{display:none}
+      .project-node.active .node-hit{animation:none}
+      .project-node.dimmed{opacity:1!important;filter:none!important}
       .detail-card{width:calc(100vw - 40px);max-width:340px}
       #lang-toggle{top:1rem;right:1rem;border-radius:12px;padding:3px}
       .lang-btn{font-size:.7rem;padding:.3rem .4rem;border-radius:9px}
@@ -314,26 +326,15 @@
 
   <div id="card-overlay"></div>
 
-  <!-- Detail Card -->
   <div class="detail-card" id="detailCard">
-    <button class="card-close" id="cardClose">✕</button>
+    <button class="card-close-btn" id="cardClose">✕</button>
     <div class="card-connector"></div>
     <div class="card-header">
-      <div>
-        <span class="card-status" id="cardStatus"></span>
-      </div>
-      <div class="card-date" id="cardDate"></div>
+      <span class="card-status" id="cardStatus"></span>
     </div>
     <div class="card-title" id="cardTitle"></div>
     <div class="card-body">
       <p class="card-desc" id="cardDesc"></p>
-    </div>
-    <div class="card-meta">
-      <div class="energy-row">
-        <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 项目成熟度</span>
-        <span class="value" id="cardEnergy">0%</span>
-      </div>
-      <div class="energy-bar"><div class="energy-bar-fill" id="cardEnergyBar" style="width:0%"></div></div>
     </div>
     <div class="card-links" id="cardLinks">
       <div class="links-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> 关联项目</div>
@@ -350,37 +351,35 @@
     (function(){
       'use strict';
 
-      /* ── Project Data ── */
       const projects = [
-        { id:0, num:'001', url:'https://777cola.github.io/investment-asset-platform/', status:'completed', energy:92, related:[2], dotAngle:45,
+        { id:0, num:'001', url:'https://777cola.github.io/investment-asset-platform/', related:[2],
+          dotAngle:45,
+          statusLabel:{'zh-CN':'运行中','zh-TW':'運行中','en':'LIVE'},
           titles:{'zh-CN':'资产管理平台','zh-TW':'資產管理平台','en':'Asset Platform'},
           descs:{'zh-CN':'投资组合管理与分析平台','zh-TW':'投資組合管理與分析平台','en':'Portfolio management & analysis platform'} },
-        { id:1, num:'002', url:'#', status:'completed', energy:85, related:[3], dotAngle:135,
+        { id:1, num:'002', url:'#', related:[3],
+          dotAngle:135,
+          statusLabel:{'zh-CN':'建设中','zh-TW':'建設中','en':'BUILDING'},
           titles:{'zh-CN':'个人网站','zh-TW':'個人網站','en':'Personal Site'},
           descs:{'zh-CN':'戚俊皓个人品牌与项目展示页面','zh-TW':'戚俊皓個人品牌與項目展示頁面','en':"Andy Qi's personal brand & project showcase"} },
-        { id:2, num:'003', url:'https://777cola.github.io/PowerPulse/', status:'in-progress', energy:72, related:[0,3], dotAngle:225,
+        { id:2, num:'003', url:'https://777cola.github.io/PowerPulse/', related:[0,3],
+          dotAngle:225,
+          statusLabel:{'zh-CN':'运行中','zh-TW':'運行中','en':'LIVE'},
           titles:{'zh-CN':'PowerPulse','zh-TW':'PowerPulse','en':'PowerPulse'},
           descs:{'zh-CN':'macOS 菜单栏电池监控与电源管理工具','zh-TW':'macOS 選單欄電池監控與電源管理工具','en':'macOS menu bar battery monitoring & power management tool'} },
-        { id:3, num:'004', url:'#', status:'pending', energy:48, related:[1,2], dotAngle:315,
+        { id:3, num:'004', url:'#', related:[1,2],
+          dotAngle:315,
+          statusLabel:{'zh-CN':'即将到来','zh-TW':'即將到來','en':'COMING SOON'},
           titles:{'zh-CN':'更多项目','zh-TW':'更多項目','en':'More Projects'},
-          descs:{'zh-CN':'更多创意项目即将到来，敬请期待','zh-TW':'更多創意項目即將到來，敬請期待','en':'More creative projects coming soon'} }
+          descs:{'zh-CN':'更多创意项目即将到来','zh-TW':'更多創意項目即將到來','en':'More creative projects coming soon'} }
       ];
 
-      const STATUS_LABELS = {
-        'zh-CN':{completed:'已完成','in-progress':'进行中',pending:'待启动'},
-        'zh-TW':{completed:'已完成','in-progress':'進行中',pending:'待啟動'},
-        'en':{completed:'COMPLETED','in-progress':'IN PROGRESS',pending:'PENDING'}
-      };
-
-      /* ── State ── */
       let currentLang = 'zh-CN';
       let animTime = 0;
       let activeNodeId = null;
-      let isMobile = false;
       const nodeRefs = [];
-      const R = 350; // orbit radius
+      const ORBIT_R = 260; // 缩小轨道半径
 
-      /* ── DOM Refs ── */
       const glow = document.getElementById('cursor-glow');
       const orbitView = document.getElementById('orbitView');
       const nodesContainer = document.getElementById('orbit-nodes');
@@ -391,51 +390,34 @@
       const detailCard = document.getElementById('detailCard');
       const cardOverlay = document.getElementById('card-overlay');
 
-      /* ── Build Interactive Nodes ── */
       function buildNodes(){
         nodesContainer.innerHTML = '';
         projects.forEach((p, i) => {
           const node = document.createElement('div');
           node.className = 'project-node';
           node.dataset.id = p.id;
-
-          const titleKey = 'titles';
-          const descKey = 'descs';
-
           node.innerHTML = `
             <div class="node-hit">
               <div>
+                <div class="node-glow-ring"></div>
                 <div class="node-num">${p.num}</div>
                 <div class="node-title" data-label="title">${p.titles[currentLang]}</div>
                 <div class="node-desc" data-label="desc">${p.descs[currentLang]}</div>
               </div>
             </div>
           `;
-
-          node.addEventListener('click', function(e){
-            e.stopPropagation();
-            toggleNode(p.id);
-          });
-
+          node.addEventListener('click', function(e){ e.stopPropagation(); toggleNode(p.id); });
           node.addEventListener('mouseenter', function(){
-            if(activeNodeId === null){
-              if(dots[i]) dots[i].classList.add('active');
-              pulseRing.classList.add('visible');
-            }
+            if(activeNodeId === null){ if(dots[i]) dots[i].classList.add('active'); pulseRing.classList.add('visible'); }
           });
           node.addEventListener('mouseleave', function(){
-            if(activeNodeId === null){
-              dots.forEach(d => d.classList.remove('active'));
-              pulseRing.classList.remove('visible');
-            }
+            if(activeNodeId === null){ dots.forEach(d => d.classList.remove('active')); pulseRing.classList.remove('visible'); }
           });
-
           nodesContainer.appendChild(node);
           nodeRefs[i] = node;
         });
       }
 
-      /* ── Position Nodes on Orbit ── */
       function updatePositions(){
         if(window.innerWidth <= 640) return;
         const total = projects.length;
@@ -444,11 +426,10 @@
           const baseAngle = projects[i].dotAngle;
           const angle = (baseAngle + animTime * 0.003 * 360) % 360;
           const rad = (angle * Math.PI) / 180;
-          const x = R * Math.cos(rad);
-          const y = R * Math.sin(rad);
-
+          const x = ORBIT_R * Math.cos(rad);
+          const y = ORBIT_R * Math.sin(rad);
           const zIndex = Math.round(100 + 20 * Math.cos(rad));
-          const opacity = Math.max(0.35, Math.min(1, 0.35 + 0.65 * ((1 + Math.sin(rad)) / 2)));
+          const opacity = Math.max(0.3, Math.min(1, 0.3 + 0.7 * ((1 + Math.sin(rad)) / 2)));
 
           node.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
           node.style.zIndex = zIndex;
@@ -459,7 +440,7 @@
             const isActive = p && p.id === parseInt(node.dataset.id);
             const isRelated = p && p.related.includes(parseInt(node.dataset.id));
             if(!isActive && !isRelated){
-              node.style.opacity = (opacity * 0.15).toString();
+              node.style.opacity = (opacity * 0.12).toString();
               node.classList.add('dimmed');
             } else {
               node.classList.remove('dimmed');
@@ -468,39 +449,30 @@
             node.classList.remove('dimmed');
           }
         });
-
-        // Update orbital dots
         dots.forEach((dot, i) => {
           if(!dot) return;
           const baseAngle = projects[i].dotAngle;
           const angle = (baseAngle + animTime * 0.003 * 360) * Math.PI / 180;
-          dot.style.transform = `translate(${Math.cos(angle)*R}px,${Math.sin(angle)*R}px)`;
+          dot.style.transform = `translate(${Math.cos(angle)*ORBIT_R}px,${Math.sin(angle)*ORBIT_R}px)`;
         });
-
         drawConnections();
       }
 
-      /* ── Connection Lines ── */
       function drawConnections(){
         if(window.innerWidth <= 640){ connectionsSvg.innerHTML = ''; return; }
-        const total = projects.length;
         const lines = [];
-        const halfW = orbitView.offsetWidth / 2 || 450;
-        const halfH = orbitView.offsetHeight / 2 || 450;
-
+        const halfW = orbitView.offsetWidth / 2 || 430;
+        const halfH = orbitView.offsetHeight / 2 || 430;
         if(activeNodeId !== null){
           const active = projects.find(p => p.id === activeNodeId);
           if(active){
             const aPos = getNodePos(active.id);
             active.related.forEach(rid => {
               const bPos = getNodePos(rid);
-              if(bPos){
-                lines.push({x1:aPos.x+halfW, y1:aPos.y+halfH, x2:bPos.x+halfW, y2:bPos.y+halfH});
-              }
+              if(bPos) lines.push({x1:aPos.x+halfW, y1:aPos.y+halfH, x2:bPos.x+halfW, y2:bPos.y+halfH});
             });
           }
         }
-
         connectionsSvg.setAttribute('viewBox', `0 0 ${halfW*2} ${halfH*2}`);
         connectionsSvg.innerHTML = lines.map(l =>
           `<line x1="${l.x1.toFixed(1)}" y1="${l.y1.toFixed(1)}" x2="${l.x2.toFixed(1)}" y2="${l.y2.toFixed(1)}"
@@ -512,14 +484,12 @@
         const p = projects.find(pr => pr.id === id);
         if(!p) return null;
         const angle = (p.dotAngle + animTime * 0.003 * 360) * Math.PI / 180;
-        return { x: R * Math.cos(angle), y: R * Math.sin(angle) };
+        return { x: ORBIT_R * Math.cos(angle), y: ORBIT_R * Math.sin(angle) };
       }
 
-      /* ── Toggle Node ── */
       function toggleNode(id){
         if(activeNodeId === id){ closeCard(); return; }
         activeNodeId = id;
-
         nodeRefs.forEach((node, i) => {
           const p = projects[i];
           node.classList.remove('active');
@@ -528,30 +498,21 @@
             if(dots[i]) dots[i].classList.add('active');
           }
         });
-
         pulseRing.classList.add('visible');
         updatePositions();
         showDetailCard(id);
       }
 
-      /* ── Show Detail Card ── */
       function showDetailCard(id){
         const p = projects.find(pr => pr.id === id);
         if(!p) return;
         const lang = currentLang;
-
-        document.getElementById('cardStatus').textContent = STATUS_LABELS[lang][p.status];
-        document.getElementById('cardStatus').className = 'card-status ' + p.status;
+        document.getElementById('cardStatus').textContent = p.statusLabel[lang];
+        document.getElementById('cardStatus').className = 'card-status ' + (p.url && p.url !== '#' ? 'completed' : 'pending');
         document.getElementById('cardTitle').textContent = p.titles[lang];
         document.getElementById('cardDesc').textContent = p.descs[lang];
-        document.getElementById('cardEnergy').textContent = p.energy + '%';
-        document.getElementById('cardEnergyBar').style.width = p.energy + '%';
-
-        const now = new Date();
-        document.getElementById('cardDate').textContent = now.getFullYear() + '.' + String(now.getMonth()+1).padStart(2,'0');
-
         const visitBtn = document.getElementById('cardVisitBtn');
-        const visitLabel = {'zh-CN':'访问项目','zh-TW':'訪問項目','en':'View Project'}[lang];
+        const visitLabel = {'zh-CN':'访问项目','zh-TW':'訪問項目','en':'View'}[lang];
         document.getElementById('cardVisitLabel').textContent = visitLabel;
         if(p.url && p.url !== '#'){
           visitBtn.onclick = function(){ window.open(p.url, '_blank'); };
@@ -560,8 +521,6 @@
           visitBtn.onclick = null;
           visitBtn.classList.add('disabled');
         }
-
-        // Connected nodes
         const linksContent = document.getElementById('cardLinksContent');
         if(p.related.length > 0){
           document.getElementById('cardLinks').style.display = 'block';
@@ -573,15 +532,11 @@
           linksContent.querySelectorAll('.link-btn').forEach(btn => {
             btn.addEventListener('click', function(e){ e.stopPropagation(); toggleNode(parseInt(this.dataset.id)); });
           });
-        } else {
-          document.getElementById('cardLinks').style.display = 'none';
-        }
-
+        } else { document.getElementById('cardLinks').style.display = 'none'; }
         cardOverlay.classList.add('visible');
         detailCard.classList.add('visible');
       }
 
-      /* ── Close Card ── */
       function closeCard(){
         activeNodeId = null;
         detailCard.classList.remove('visible');
@@ -595,105 +550,52 @@
       document.getElementById('cardClose').addEventListener('click', closeCard);
       cardOverlay.addEventListener('click', closeCard);
 
-      /* ── Language ── */
+      document.addEventListener('click', function(e){
+        if(activeNodeId !== null && !e.target.closest('.project-node') && !e.target.closest('.detail-card') && !e.target.closest('#card-overlay')) closeCard();
+      });
+
       function applyLang(lang){
         currentLang = lang;
-        const d = {
-          'zh-CN':{hubRole:'项目枢纽',hubName:'戚俊皓',hubSub:'QI JUNHAO',footer:'© 2026 戚俊皓'},
-          'zh-TW':{hubRole:'項目樞紐',hubName:'戚俊皓',hubSub:'QI JUNHAO',footer:'© 2026 戚俊皓'},
-          'en':{hubRole:'Project Hub',hubName:'Andy Qi',hubSub:'QI JUNHAO',footer:'© 2026 Andy Qi'}
-        }[lang];
-        document.getElementById('hubNameCN').textContent = d.hubName;
-        document.getElementById('hubNameEN').textContent = d.hubSub;
-        document.getElementById('hubRole').textContent = d.hubRole;
-        document.getElementById('footerText').textContent = d.footer;
-
-        // Update nodes text
-        document.querySelectorAll('[data-label="title"]').forEach((el, i) => {
-          if(projects[i]) el.textContent = projects[i].titles[lang];
-        });
-        document.querySelectorAll('[data-label="desc"]').forEach((el, i) => {
-          if(projects[i]) el.textContent = projects[i].descs[lang];
-        });
-
-        document.querySelectorAll('.lang-btn').forEach(b => {
-          b.classList.toggle('active', b.dataset.lang === lang);
-        });
+        const d = {'zh-CN':{r:'项目枢纽',n:'戚俊皓',s:'QI JUNHAO',f:'© 2026 戚俊皓'},'zh-TW':{r:'項目樞紐',n:'戚俊皓',s:'QI JUNHAO',f:'© 2026 戚俊皓'},'en':{r:'Project Hub',n:'Andy Qi',s:'QI JUNHAO',f:'© 2026 Andy Qi'}}[lang];
+        document.getElementById('hubNameCN').textContent = d.n;
+        document.getElementById('hubNameEN').textContent = d.s;
+        document.getElementById('hubRole').textContent = d.r;
+        document.getElementById('footerText').textContent = d.f;
+        document.querySelectorAll('[data-label="title"]').forEach((el, i) => { if(projects[i]) el.textContent = projects[i].titles[lang]; });
+        document.querySelectorAll('[data-label="desc"]').forEach((el, i) => { if(projects[i]) el.textContent = projects[i].descs[lang]; });
+        document.querySelectorAll('.lang-btn').forEach(b => { b.classList.toggle('active', b.dataset.lang === lang); });
         document.documentElement.lang = lang;
-
-        // Refresh card if open
         if(activeNodeId !== null) showDetailCard(activeNodeId);
-
-        // Update external links language param
-        const langMap = {'zh-CN':'zh','zh-TW':'zh-hant','en':'en'};
-        const targetLang = langMap[lang] || 'zh';
-        projects.forEach((p, i) => {
-          const node = nodeRefs[i];
-          const linkEl = node ? node.querySelector('a') : null;
-          if(p.url && p.url !== '#'){}
-        });
       }
 
-      document.querySelectorAll('.lang-btn').forEach(b => {
-        b.addEventListener('click', () => applyLang(b.dataset.lang));
-      });
+      document.querySelectorAll('.lang-btn').forEach(b => { b.addEventListener('click', () => applyLang(b.dataset.lang)); });
+      document.addEventListener('mousemove', e => { glow.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; });
 
-      /* ── Cursor Glow ── */
-      document.addEventListener('mousemove', e => {
-        glow.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
-      });
-
-      /* ── Click outside close ── */
-      document.addEventListener('click', function(e){
-        if(activeNodeId !== null && !e.target.closest('.project-node') && !e.target.closest('.detail-card') && !e.target.closest('#card-overlay')){
-          closeCard();
-        }
-      });
-
-      /* ── Init ── */
       buildNodes();
       applyLang('zh-CN');
+      requestAnimationFrame(() => { document.getElementById('orbitView').classList.add('loaded'); });
 
-      // Load animation
-      requestAnimationFrame(() => {
-        document.getElementById('orbitView').classList.add('loaded');
-      });
-
-      /* ── Resize ── */
       window.addEventListener('resize', function(){
-        isMobile = window.innerWidth <= 640;
-        if(isMobile){
-          nodeRefs.forEach(node => {
-            if(!node) return;
-            node.style.transform = ''; node.style.opacity = ''; node.style.zIndex = ''; node.classList.remove('dimmed');
-          });
+        if(window.innerWidth <= 640){
+          nodeRefs.forEach(node => { if(!node) return; node.style.transform = ''; node.style.opacity = ''; node.style.zIndex = ''; node.classList.remove('dimmed'); });
           connectionsSvg.innerHTML = '';
         }
       });
 
-      /* ── Animation Loop ── */
       function animate(time){
         animTime = time / 1000;
-        const isMob = window.innerWidth <= 640;
-
-        if(!isMob){
-          // Hub float
+        if(window.innerWidth > 640){
           const fy = Math.sin(time * 0.0008) * 3;
           const fx = Math.cos(time * 0.0007) * 1.5;
           hub.style.transform = `translate(calc(-50% + ${fx}px), calc(-50% + ${fy}px))`;
-
-          // Ring rotation
           document.querySelector('.orb-ring.r1').style.transform = `translate(-50%,-50%) rotate(${time*0.004}deg)`;
           document.querySelector('.orb-ring.r2').style.transform = `translate(-50%,-50%) rotate(${-time*0.006}deg)`;
           document.querySelector('.orb-ring.r3').style.transform = `translate(-50%,-50%) rotate(${time*0.005}deg)`;
         }
-
         updatePositions();
         requestAnimationFrame(animate);
       }
       requestAnimationFrame(animate);
-
-      isMobile = window.innerWidth <= 640;
     })();
   </script>
 </body>
