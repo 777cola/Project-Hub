@@ -268,27 +268,28 @@
       .project-node .node-title{font-size:1rem}
       .project-node .node-desc{font-size:.7rem}
     }
-    @media(max-width:640px){
+    @media(max-width:768px){
       body{overflow-y:auto}
       .orbit-view{width:100%;height:auto;flex-direction:column;padding:5rem 1.5rem 3rem;max-width:none}
       .orbit-view .orb-ring,.orb-dot,.pulse-ring,#connections{display:none}
       .center-hub{position:relative;top:auto;left:auto;transform:none!important;margin-bottom:2.5rem;pointer-events:none;width:150px;height:150px}
-      .center-hub .name-cn{font-size:1.1rem}
-      .center-hub .name-en{font-size:.75rem}
-      .center-hub .role{font-size:.65rem}
+      .center-hub .name-cn{font-size:1.25rem}
+      .center-hub .name-en{font-size:.85rem}
+      .center-hub .role{font-size:.75rem}
       #orbit-nodes{position:relative;width:100%;max-width:400px}
       .project-node{position:relative!important;top:auto!important;left:auto!important;margin-bottom:1.5rem;display:block;opacity:1!important;width:100%;transform:none!important}
-      .project-node .node-hit{width:auto;height:auto}
-      .project-node .node-num{text-align:left;font-size:.6rem;margin-bottom:0}
-      .project-node .node-title{text-align:left;font-size:1.05rem}
-      .project-node .node-desc{text-align:left;font-size:.7rem}
+      .project-node .node-hit{width:auto;height:auto;min-height:44px}
+      .project-node .node-num{text-align:left;font-size:.65rem;margin-bottom:0}
+      .project-node .node-title{text-align:left;font-size:1.1rem}
+      .project-node .node-desc{text-align:left;font-size:.75rem}
       .project-node .node-glow-ring{display:none}
       .project-node.active .node-hit{animation:none}
       .project-node.dimmed{opacity:1!important;filter:none!important}
-      .detail-card{width:calc(100vw - 40px);max-width:340px}
-      #lang-toggle{top:1rem;right:1rem;border-radius:12px;padding:3px}
-      .lang-btn{font-size:.7rem;padding:.3rem .4rem;border-radius:9px}
-      .lang-btn.active{padding:.3rem .6rem}
+      .detail-card{width:calc(100vw - 40px);max-width:360px}
+      #lang-toggle{top:.75rem;right:.75rem;border-radius:12px;padding:3px}
+      .lang-btn{font-size:.75rem;padding:.35rem .45rem;border-radius:9px;min-height:44px}
+      .lang-btn.active{padding:.35rem .65rem}
+      .orbit-footer p{font-size:.7rem;white-space:pre-line;line-height:1.5}
       .project-node.dimmed{opacity:1!important;filter:none!important}
     }
   </style>
@@ -345,7 +346,7 @@
     </div>
   </div>
 
-  <div class="orbit-footer"><p id="footerText">&copy; 2026 戚俊皓</p></div>
+  <div class="orbit-footer"><p id="footerText">&copy; 2026 戚俊皓<br>版本号：2026/06/26</p></div>
 
   <script>
     (function(){
