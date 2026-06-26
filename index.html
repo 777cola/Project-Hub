@@ -387,10 +387,11 @@
       const ORBIT_R = 260;
 
       function getOrbitRadii(){
-        const w = window.innerWidth;
+        const w = window.innerWidth, h = window.innerHeight;
         if(w <= 768){
-          const r = Math.min(w * 0.38, 190);
-          return { rx: Math.round(r), ry: Math.round(r * 0.7) };
+          const rx = Math.min(w * 0.35, 165);
+          const ry = Math.min(h * 0.28, 260);
+          return { rx: Math.round(rx), ry: Math.round(ry) };
         }
         return { rx: ORBIT_R, ry: ORBIT_R };
       } // 缩小轨道半径
