@@ -248,7 +248,7 @@
 
     /* ── Footer ── */
     .orbit-footer{position:fixed;bottom:1.5rem;left:0;right:0;z-index:1;text-align:center}
-    .orbit-footer p{font-size:.6rem;font-weight:400;letter-spacing:.15em;color:rgba(0,0,0,.25)}
+    .orbit-footer p{font-size:.7rem;font-weight:400;letter-spacing:.15em;color:rgba(0,0,0,.25);white-space:pre-line;line-height:1.5}
 
     /* ── 入场 ── */
     .orbit-view.loaded .project-node{opacity:1}
@@ -542,7 +542,7 @@
 
       function applyLang(lang){
         currentLang = lang;
-        const d = {'zh-CN':{r:'项目枢纽',n:'戚俊皓',s:'QI JUNHAO',f:'© 2026 戚俊皓'},'zh-TW':{r:'項目樞紐',n:'戚俊皓',s:'QI JUNHAO',f:'© 2026 戚俊皓'},'en':{r:'Project Hub',n:'Andy Qi',s:'QI JUNHAO',f:'© 2026 Andy Qi'}}[lang];
+        const d = {'zh-CN':{r:'项目枢纽',n:'戚俊皓',s:'QI JUNHAO',f:'© 2026 戚俊皓\n版本号：2026/06/26'},'zh-TW':{r:'項目樞紐',n:'戚俊皓',s:'QI JUNHAO',f:'© 2026 戚俊皓\n版本號：2026/06/26'},'en':{r:'Project Hub',n:'Andy Qi',s:'QI JUNHAO',f:'© 2026 Andy Qi\nVersion: 2026/06/26'}}[lang];
         document.getElementById('hubNameCN').textContent = d.n;
         document.getElementById('hubNameEN').textContent = d.s;
         document.getElementById('hubRole').textContent = d.r;
