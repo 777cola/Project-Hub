@@ -269,48 +269,23 @@
       .project-node .node-desc{font-size:.7rem}
     }
     @media(max-width:768px){
-      body{overflow-y:auto}
-      .orbit-view{width:100%;height:auto;flex-direction:column;padding:5rem 1.5rem 3rem;max-width:none}
+      body{overflow:hidden}
+      .orbit-wrap{height:100vh;overflow:hidden}
+      .orbit-view{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:0}
       .orbit-view .orb-ring,.orb-dot,.pulse-ring,#connections{display:none}
-      .center-hub{position:relative;top:auto;left:auto;transform:none!important;margin-bottom:2rem;pointer-events:none;width:150px;height:150px}
-      .center-hub .name-cn{font-size:1.25rem}
-      .center-hub .name-en{font-size:.85rem}
-      .center-hub .role{font-size:.75rem}
-      #orbit-nodes{position:relative;width:100%;max-width:400px}
-      .project-node{position:relative!important;top:auto!important;left:auto!important;margin-bottom:1rem;display:block;opacity:1!important;width:100%;transform:none!important;animation:none!important}
-      .project-node .node-hit{
-        width:auto;height:auto;min-height:44px;
-        background:#fff;border-radius:14px;padding:1rem 1.25rem;
-        box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.05);
-        transition:box-shadow .3s,transform .3s;
-        cursor:pointer;
-      }
-      .project-node .node-hit:active{transform:scale(.97);box-shadow:0 1px 4px rgba(0,0,0,.08)}
-      .project-node .node-num{text-align:left;font-size:.65rem;margin-bottom:.2rem;color:rgba(0,0,0,.3)}
-      .project-node .node-title{text-align:left;font-size:1.1rem;color:#1a1a1a}
-      .project-node .node-desc{text-align:left;font-size:.75rem;color:rgba(0,0,0,.5);margin-top:.15rem}
-      .project-node .node-glow-ring{display:none}
-      .project-node.active .node-hit{animation:none;border-color:#b48a64;box-shadow:0 2px 16px rgba(180,140,100,.15)}
-      .project-node.dimmed{opacity:1!important;filter:none!important}
-
-      /* 卡片入场动画：错开淡入上移 */
-      @keyframes cardIn{
-        from{opacity:0;transform:translateY(20px)}
-        to{opacity:1;transform:translateY(0)}
-      }
-      .orbit-view.loaded .project-node{
-        animation:cardIn .5s cubic-bezier(.22,1,.36,1) both!important;
-      }
-      .orbit-view.loaded .project-node:nth-child(2){animation-delay:.1s!important}
-      .orbit-view.loaded .project-node:nth-child(3){animation-delay:.2s!important}
-      .orbit-view.loaded .project-node:nth-child(4){animation-delay:.3s!important}
-
-      .detail-card{width:calc(100vw - 40px);max-width:360px}
-      #lang-toggle{top:.75rem;right:.75rem;border-radius:12px;padding:3px}
-      .lang-btn{font-size:.75rem;padding:.35rem .45rem;border-radius:9px;min-height:44px}
-      .lang-btn.active{padding:.35rem .65rem}
-      .orbit-footer p{font-size:.7rem;white-space:pre-line;line-height:1.5}
-      .project-node.dimmed{opacity:1!important;filter:none!important}
+      .center-hub{width:120px;height:120px;pointer-events:none}
+      .center-hub .name-cn{font-size:1.05rem}
+      .center-hub .name-en{font-size:.7rem}
+      .center-hub .role{font-size:.6rem}
+      .project-node .node-num{font-size:.55rem}
+      .project-node .node-title{font-size:.85rem}
+      .project-node .node-desc{font-size:.6rem}
+      #lang-toggle{top:.6rem;right:.6rem;border-radius:10px;padding:2px}
+      .lang-btn{font-size:.65rem;padding:.25rem .35rem;border-radius:8px;min-height:38px}
+      .lang-btn.active{padding:.25rem .5rem}
+      .orbit-footer{bottom:.8rem}
+      .orbit-footer p{font-size:.55rem;white-space:pre-line;line-height:1.4}
+      .detail-card{width:calc(100vw - 32px);max-width:320px}
     }
   </style>
 </head>
@@ -396,7 +371,16 @@
       let animTime = 0;
       let activeNodeId = null;
       const nodeRefs = [];
-      const ORBIT_R = 260; // 缩小轨道半径
+      const ORBIT_R = 260;
+
+      function getOrbitRadii(){
+        const w = window.innerWidth;
+        if(w <= 768){
+          const r = Math.min(w * 0.38, 190);
+          return { rx: Math.round(r), ry: Math.round(r * 0.7) };
+        }
+        return { rx: ORBIT_R, ry: ORBIT_R };
+      } // 缩小轨道半径
 
       const glow = document.getElementById('cursor-glow');
       const orbitView = document.getElementById('orbitView');
@@ -437,15 +421,15 @@
       }
 
       function updatePositions(){
-        if(window.innerWidth <= 768) return;
+        const {rx, ry} = getOrbitRadii();
         const total = projects.length;
         nodeRefs.forEach((node, i) => {
           if(!node) return;
           const baseAngle = projects[i].dotAngle;
           const angle = (baseAngle + animTime * 0.003 * 360) % 360;
           const rad = (angle * Math.PI) / 180;
-          const x = ORBIT_R * Math.cos(rad);
-          const y = ORBIT_R * Math.sin(rad);
+          const x = rx * Math.cos(rad);
+          const y = ry * Math.sin(rad);
           const zIndex = Math.round(100 + 20 * Math.cos(rad));
           const opacity = Math.max(0.3, Math.min(1, 0.3 + 0.7 * ((1 + Math.sin(rad)) / 2)));
 
@@ -470,8 +454,9 @@
         dots.forEach((dot, i) => {
           if(!dot) return;
           const baseAngle = projects[i].dotAngle;
+          const {rx, ry} = getOrbitRadii();
           const angle = (baseAngle + animTime * 0.003 * 360) * Math.PI / 180;
-          dot.style.transform = `translate(${Math.cos(angle)*ORBIT_R}px,${Math.sin(angle)*ORBIT_R}px)`;
+          dot.style.transform = `translate(${Math.cos(angle)*rx}px,${Math.sin(angle)*ry}px)`;
         });
         drawConnections();
       }
@@ -501,8 +486,9 @@
       function getNodePos(id){
         const p = projects.find(pr => pr.id === id);
         if(!p) return null;
+        const {rx, ry} = getOrbitRadii();
         const angle = (p.dotAngle + animTime * 0.003 * 360) * Math.PI / 180;
-        return { x: ORBIT_R * Math.cos(angle), y: ORBIT_R * Math.sin(angle) };
+        return { x: rx * Math.cos(angle), y: ry * Math.sin(angle) };
       }
 
       function toggleNode(id){
@@ -582,15 +568,12 @@
       requestAnimationFrame(() => { document.getElementById('orbitView').classList.add('loaded'); });
 
       window.addEventListener('resize', function(){
-        if(window.innerWidth <= 640){
-          nodeRefs.forEach(node => { if(!node) return; node.style.transform = ''; node.style.opacity = ''; node.style.zIndex = ''; node.classList.remove('dimmed'); });
-          connectionsSvg.innerHTML = '';
-        }
+        // resize handled by next animation frame — nothing to do here
       });
 
       function animate(time){
         animTime = time / 1000;
-        if(window.innerWidth > 640){
+        if(window.innerWidth > 768){
           const fy = Math.sin(time * 0.0008) * 3;
           const fx = Math.cos(time * 0.0007) * 1.5;
           hub.style.transform = `translate(calc(-50% + ${fx}px), calc(-50% + ${fy}px))`;
