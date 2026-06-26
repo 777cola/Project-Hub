@@ -337,10 +337,7 @@
     <div class="card-body">
       <p class="card-desc" id="cardDesc"></p>
     </div>
-    <div class="card-links" id="cardLinks">
-      <div class="links-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> 关联项目</div>
-      <div id="cardLinksContent"></div>
-    </div>
+
     <div class="card-action">
       <button class="visit-btn" id="cardVisitBtn"><span id="cardVisitLabel">访问项目</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
     </div>
@@ -362,7 +359,7 @@
           dotAngle:135,
           statusLabel:{'zh-CN':'建设中','zh-TW':'建設中','en':'BUILDING'},
           titles:{'zh-CN':'个人网站','zh-TW':'個人網站','en':'Personal Site'},
-          descs:{'zh-CN':'戚俊皓个人品牌与项目展示页面','zh-TW':'戚俊皓個人品牌與項目展示頁面','en':"Andy Qi's personal brand & project showcase"} },
+          descs:{'zh-CN':'戚俊皓个人展示网站','zh-TW':'戚俊皓個人展示網站','en':"Andy Qi's personal showcase website"} },
         { id:2, num:'003', url:'https://777cola.github.io/PowerPulse/', related:[0,3],
           dotAngle:225,
           statusLabel:{'zh-CN':'运行中','zh-TW':'運行中','en':'LIVE'},
@@ -460,7 +457,7 @@
       }
 
       function drawConnections(){
-        if(window.innerWidth <= 640){ connectionsSvg.innerHTML = ''; return; }
+        if(window.innerWidth <= 768){ connectionsSvg.innerHTML = ''; return; }
         const lines = [];
         const halfW = orbitView.offsetWidth / 2 || 430;
         const halfH = orbitView.offsetHeight / 2 || 430;
@@ -522,18 +519,6 @@
           visitBtn.onclick = null;
           visitBtn.classList.add('disabled');
         }
-        const linksContent = document.getElementById('cardLinksContent');
-        if(p.related.length > 0){
-          document.getElementById('cardLinks').style.display = 'block';
-          linksContent.innerHTML = p.related.map(rid => {
-            const rel = projects.find(r => r.id === rid);
-            if(!rel) return '';
-            return `<button class="link-btn" data-id="${rid}">${rel.titles[lang]}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>`;
-          }).join('');
-          linksContent.querySelectorAll('.link-btn').forEach(btn => {
-            btn.addEventListener('click', function(e){ e.stopPropagation(); toggleNode(parseInt(this.dataset.id)); });
-          });
-        } else { document.getElementById('cardLinks').style.display = 'none'; }
         cardOverlay.classList.add('visible');
         detailCard.classList.add('visible');
       }
