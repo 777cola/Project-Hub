@@ -323,6 +323,7 @@
       <div class="orb-dot" id="dot1"></div>
       <div class="orb-dot" id="dot2"></div>
       <div class="orb-dot" id="dot3"></div>
+      <div class="orb-dot" id="dot4"></div>
       <div class="pulse-ring" id="pulseRing"></div>
       <svg id="connections"></svg>
 
@@ -380,7 +381,12 @@
           dotAngle:315,
           statusLabel:{'zh-CN':'运行中','zh-TW':'運行中','en':'LIVE'},
           titles:{'zh-CN':'ResumeMailer · 批量投递','zh-TW':'ResumeMailer · 批量投遞','en':'ResumeMailer'},
-          descs:{'zh-CN':'批量发送个性化求职邮件的本地 Web 工具','zh-TW':'批量發送個性化求職郵件的本地 Web 工具','en':'Batch email sender for job seekers'} }
+          descs:{'zh-CN':'批量发送个性化求职邮件的本地 Web 工具','zh-TW':'批量發送個性化求職郵件的本地 Web 工具','en':'Batch email sender for job seekers'} },
+        { id:4, num:'005', url:'#', related:[],
+          dotAngle:0,
+          statusLabel:{'zh-CN':'即将到来','zh-TW':'即將到來','en':'COMING SOON'},
+          titles:{'zh-CN':'更多项目','zh-TW':'更多項目','en':'More Projects'},
+          descs:{'zh-CN':'更多创意项目即将到来','zh-TW':'更多創意項目即將到來','en':'More creative projects coming soon'} }
       ];
 
       let currentLang = 'zh-CN';
@@ -402,7 +408,7 @@
       const glow = document.getElementById('cursor-glow');
       const orbitView = document.getElementById('orbitView');
       const nodesContainer = document.getElementById('orbit-nodes');
-      const dots = [0,1,2,3].map(i => document.getElementById('dot'+i));
+      const dots = [0,1,2,3,4].map(i => document.getElementById('dot'+i));
       const hub = document.getElementById('centerHub');
       const pulseRing = document.getElementById('pulseRing');
       const connectionsSvg = document.getElementById('connections');
